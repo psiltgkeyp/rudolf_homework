@@ -1,0 +1,27 @@
+class SmartString(str):
+    def __len__(self):
+        return len(set(self))
+
+    def __str__(self):
+        normal_len = super().__len__()
+        unique_len = len(set(self))
+        return f"{super().__str__()} ({normal_len}, {unique_len})"
+
+    def __add__(self, other):
+        return SmartString(super().__add__(str(other)))
+
+
+# создаем объекты
+ss1 = SmartString("hello")
+ss2 = SmartString("world")
+ss3 = SmartString("абубарахар")
+
+# прова len() - должно вернуть колво уник букв
+print(len(ss1))  # 4 (буквы: h, e, l, o)
+print(len(ss2))  # 5 (буквы: w, o, r, l, d)
+print(len(ss3))  # 5 (буквы: а, б, р, к, д)
+
+# прова print() - должно вывести слово (длина, уникальные)
+print(ss1)  # hello (5, 4)
+print(ss2)  # world (5, 5)
+print(ss3)  # абубарахар (10, 5)
