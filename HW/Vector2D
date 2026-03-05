@@ -1,0 +1,61 @@
+class Vector2D:
+    def __init__(self, a=0, b=0):
+        self.a = a
+        self.b = b
+
+    def __len__(self):
+        kv1 = self.a ** 2
+        kv2 = self.b ** 2
+        dlina = (kv1 + kv2) ** 0.5
+        okruglen = round(dlina)
+        return okruglen
+
+    def __str__(self):
+        return f"Vector({self.a}, {self.b})"
+
+    def __repr__(self):
+        return str(self)
+
+    def __add__(self, drugoy):
+        if isinstance(drugoy, Vector2D):
+            nov_x = self.a + drugoy.a
+            nov_y = self.b + drugoy.b
+            rezultat = Vector2D(nov_x, nov_y)
+            return rezultat
+        return NotImplemented
+
+    def __eq__(self, drugoy):
+        if isinstance(drugoy, Vector2D):
+            ravno_x = self.a == drugoy.a
+            ravno_y = self.b == drugoy.b
+            return ravno_x and ravno_y
+        return NotImplemented
+
+
+if __name__ == "__main__":
+    print("Проверка Vector2D")
+    print("-" * 40)
+
+    v1 = Vector2D(3, 4)
+    v2 = Vector2D(1, 2)
+    v3 = Vector2D(3, 4)
+
+    print("1) Красивый вывод")
+    print("   v1:", v1)
+    print("   v2:", v2)
+    print()
+
+    print("2) __len__ (длина вектора, округленная до целого)")
+    print("   len(Vector2D(3, 4)):", len(v1))
+    print("   len(Vector2D(1, 2)):", len(v2))
+    print()
+
+    print("3) Сложение векторов")
+    summa = v1 + v2
+    print("   v1 + v2 =", summa)
+    print("   Координаты суммы:", summa.a, summa.b)
+    print()
+
+    print("4) Сравнение векторов")
+    print("   v1 == v2:", v1 == v2)
+    print("   v1 == v3:", v1 == v3)
